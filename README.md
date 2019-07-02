@@ -9,17 +9,26 @@ libpostal is not multicore, so this forks commands in the background (as needed)
 
 # Usage
 
-```package main
+Code:
+```
+package main
 
 import "gopkg.in/tuxuri/gopostalmulti.v2"
 import "fmt"
 
 func main() {
-	l := gopostalmulti.Libpostal{
-		Path: "/usr/local/bin/gopostalmultic",
+	backends := runtime.NumCPU() / 2 // Default is NumCPU(), but we'll reduce it for this example
+	if backends <= 1 {
+		backends = 1
 	}
-	l.Init()
-	data := l.Parse("Kuala Lumpur")
+	libpostal := gopostalmulti.Libpostal{
+		Path: "/usr/local/bin/gopostalmultic",
+		MaxBackend: backends,
+	}
+	// Do checks and updates before parsing.
+	
+	libpostal.Init() // Actually loads and spawns the C backends.
+	data := libpostal.Parse("Kuala Lumpur")
 	fmt.Printf("%+v\n", data)
 }
 ```
