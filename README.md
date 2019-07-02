@@ -6,3 +6,20 @@ It doesn't require the Go library bindings for libpostal, just compiled binary o
 
 # gopostalmulti
 libpostal is not multicore, so this forks commands in the background (as needed) to help parse additional addresses
+
+# Usage
+
+```package main
+
+import "gopkg.in/tuxuri/gopostalmulti.v2"
+import "fmt"
+
+func main() {
+	l := gopostalmulti.Libpostal{
+		Path: "/usr/local/bin/gopostalmultic",
+	}
+	l.Init()
+	data := l.Parse("Kuala Lumpur")
+	fmt.Printf("%+v\n", data)
+}
+```
