@@ -13,8 +13,12 @@ Code:
 ```
 package main
 
-import "gopkg.in/tuxuri/gopostalmulti.v2"
-import "fmt"
+import (
+	"fmt"
+	"runtime"
+
+	"gopkg.in/tuxuri/gopostalmulti.v2"
+)
 
 func main() {
 	backends := runtime.NumCPU() / 2 // Default is NumCPU(), but we'll reduce it for this example
