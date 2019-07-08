@@ -1,4 +1,4 @@
-module github.com/tuxuri/gopostalmulti
+module gopkg.in/tuxuri/gopostalmulti.v2
 
 go 1.12
 
